@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]>
+<!-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/basic">
+ <!--<![endif]-->
+
+
+<th:block layout:fragment="content">
+<body id="top">
+<header th:include="fragments/header::commonheader"></header>
+	<section id="contact">
+		<div style="background-color: #FFFFFF; padding-bottom: 3rem">
+			<div class="row add-bottom">
+				<div class="col-twelve">
+					<h3></h3>
+					<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>회원번호</th>
+						<th>이메일</th>
+						<th>회사</th>
+						<th>가입일자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${not #lists.isEmpty( memberList )}" th:each="row : ${memberList}">
+						<td th:text="${row.num}"></td>
+						<td align="center">
+							<a th:href="@{/member/view.do( num=${row.num} )}" th:text="${row.email}"></a>
+						</td>
+						<td th:text="${row.company}"></td>
+						<td th:text="${#temporals.format( row.insertTime, 'yyyy-MM-dd' )}"></td>
+					</tr>
+					<tr th:unless="${not #lists.isEmpty( boardList )}">
+						<td colspan="5">조회된 결과가 없습니다.</td>
+					</tr>
+				</tbody>
+			</table>
+					</div>
+				</div>
+				<th:block layout:fragment="paging">
+				<nav th:replace="fragments/common :: pagination"></nav>
+				</th:block>
+			</div>
+		</div>
+	</section>
+		<th:block layout:fragment="script">
+   		<script th:src="@{/js/plugins.js}"></script>
+  		<script th:src="@{/js/main.js}"></script>
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			function movePage(uri, queryString) {
+				location.href = uri + queryString;
+			}
+
+			/*]]>*/
+		</script>
+		</th:block>
+		</body>
+	</th:block>
+</html>

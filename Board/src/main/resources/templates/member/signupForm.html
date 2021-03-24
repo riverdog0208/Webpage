@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/basic">
+<th:block layout:fragment="title">
+	<title>this page is a signup page</title>
+</th:block>
+
+<th:block layout:fragment="content">
+<header th:include="fragments/header::commonheader"></header>
+<section id="contact">
+	<div class="row contact-content" >
+		
+        <form action="/member/signup" th:object="${member}" method="post" onsubmit="return validate()" name="contactForm" id="contactForm">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			<label for="email" class="col-sm-2 control-label">이메일</label>
+			<div class="form-field">
+                    <input type="text" th:field="*{email}" placeholder="이메일입력" name="Email" id = "Email" class="form-control">
+			</div>
+			<label for="password" class="col-sm-2 control-label">비밀번호</label>
+			<div class="form-field">		
+                   <input type="password" th:field="*{password}" placeholder="비밀번호" class="form-control" name="pwd" id="pwd"> 		
+			</div>
+			<label for="password" class="col-sm-2 control-label">비밀번호 확인</label>
+			<div class="form-field">
+                    <input type="password" placeholder="비밀번호를 재입력 해주세요" class="form-control"  name="pwd2" id="pwd2"> 
+			</div>
+			<label for="company" class="col-sm-2 control-label">회사명</label>
+			<div class="form-field">
+                    <input type="text" th:field="*{company}" placeholder="회사명입력" class="form-control" name="company" id="company">
+			</div>
+			<div th:if="${param.error}" class="alert-box ss-error hideit">
+					<p th:text="${exception}"></p>
+				</div>
+			<div class="btn_wrap text-center">
+				<a th:href="@{/}" class="btn btn-default waves-effect waves-light">뒤로가기</a>
+				<button type="submit"
+					class="submitform">회원가입</button>
+			</div>
+		</form>
+		
+	</div>
+	
+	<!-- /.card-content -->
+	<script th:src="@{/js/plugins.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/scripts/common.js}"></script>
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+			/* <![CDATA[ */
+		    function validate() {
+		        //event.preventDefault();
+		        var Email = document.getElementById("Email");
+		        var password = document.getElementById("pwd");
+		        var password2 = document.getElementById("pwd2");
+		        var company = document.getElementById("company");
+
+		 
+		        //아이디와 패스워드 값 데이터 정규화 공식
+		        //var regul1 = /^[a-zA-Z0-9]{6,15}$/;
+		        var regul1 = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]{6,15}$/;
+		        //이메일 값 데이터 유효성 체크
+		        //[]안에 있는 값만 쓰겠다
+		 
+		        //이메일 정규화 공식
+		        var regul2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+		        //이름 정규화 공식
+		        var regul3 = /^[가-힝a-zA-Z]{2,}$/;
+		        //var email = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+		 		
+		        		        //이메일 입력 안했을 경우
+		        if ((Email.value)=="") {
+		            alert("이메일을 입력해 주세요");
+		            Email.focus();
+		            return false;
+		        }
+		        //이메일이 잘못된 경우
+		        if (!check(regul2,Email,"잘못된 이메일 형식입니다.")) {
+		            return false;
+		        }
+		        //비밀번호 입력 하지 않았을 경우
+		        if ((password.value) == ""){
+		            alert("비밀번호를 입력해 주세요");
+		            password.focus();
+		            return false;
+		        }
+		        if ((password2.value=="")){
+		            alert("비밀번호를 재입력해 주세요");
+		            password.focus();
+		            return false;
+		        }
+		 
+		        //비밀번호 유효성 검사
+		        //만약 내가 비밀번호에 정규화 방식을 하나라도 지키지 않으면 if문 안으로 들어가서 alert message를 띄움
+		        if (!check(regul1,password,"비밀번호는 6~15자를 벗어날수 없습니다.")) {
+		            return false;
+		        }
+		        
+		        //비밀번호와 비밀번호 확인이 일치 하지 않을 경우
+		        if ((password.value)!=(password2.value)) {
+		            alert("비밀번호가 일치 하지 않습니다.");
+		            password.focus();
+		            password2.focus();
+		            return false;
+		        }
+
+		        //회사 입력 안 한 경우
+		        if ((company.value)=="") {
+		            alert("회사명을 입력해 주세요");
+		            company.focus();
+		            return false;
+		        }
+		    }
+		    function check(re,what,message){//정규화데이터,아이템 id,메세지
+		        if (re.test(what.value)) {//what의 문자열에 re의 패턴이 있는지 나타내는 함수 test
+		        //만약 내가 입력한 곳의 값이 정규화 데이터를 썼다면 true를 반환해서 호출 된 곳으로 리턴됨
+		            return true;
+		        }
+		        alert(message);
+		        what.value = "";
+		        what.focus();
+		    }
+			/*[- end of onload -]*/
+
+			/* ]]> */
+			</script>
+		</th:block>
+	</section>
+</html>

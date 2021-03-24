@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]>
+<!-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/basic">
+ <!--<![endif]-->
+
+
+<th:block layout:fragment="content">
+<body id="top">
+
+	<!-- header 
+   ================================================== -->
+   <header>
+		<div class="header-logo">
+		<a th:href="@{/}">IntuWorks</a>
+	</div>
+
+	<a id="header-menu-trigger" href="#0"> 
+		<span class="header-menu-text">Menu</span> 
+		<span class="header-menu-icon"></span>
+	</a>
+
+	<nav id="menu-nav-wrap">
+
+		<a href="#0" class="close-button" title="close"><span>Close</span></a>
+
+		<h3>IntuWorks</h3>
+
+		<ul class="nav-list">
+			<h3 sec:authorize="isAuthenticated()">
+				hello, <span sec:authentication="name"></span>!
+			</h3>
+			<li class="current"><a class="smoothscroll" href="#home"
+				title="">Home</a></li>
+			<li><a th:href="@{/board/list.do}">board</a></li>
+			<li><a class="smoothscroll" href="#about" title="">About</a></li>
+			<li><a class="smoothscroll" href="#services" title="">Services</a></li>
+			<li><a class="smoothscroll" href="#testimonials" title="">Works</a></li>
+			<li><a class="smoothscroll" href="#contact" title="">Contact</a></li>
+			<li><a sec:authorize="isAnonymous()" th:href="@{/member/login}">Login</a></li>
+			<li><a th:if="${#authentication.name} =='admin'" th:href="@{/admin/memberlist}">Member List</a></li>
+			<li><a sec:authorize="isAuthenticated()"
+				th:href="@{/member/logout}">Logout</a></li>
+		</ul>
+
+
+	</nav>
+	<!-- end #menu-nav-wrap -->
+</header>
+
+   <!-- home
+   ================================================== -->
+   <section id="home">
+
+   	<div class="overlay"></div>
+
+   	<div class="home-content-table">	
+		   <div class="home-content-tablecell">
+		   	<div class="row">
+		   		<div class="col-twelve">		   			
+			  		
+			  				<h3 class="animate-intro"></h3>
+				  			<h1 class="animate-intro">
+							  <br>
+							  IntuWorks
+				  			</h1>	
+
+				  			<div class="more animate-intro">
+				  				<a class="smoothscroll button stroke" href="#about">
+				  					Learn More
+				  				</a>
+				  			</div>							
+
+			  		</div> <!-- end col-twelve --> 
+		   	</div> <!-- end row --> 
+		   </div> <!-- end home-content-tablecell --> 		   
+		</div> <!-- end home-content-table -->
+
+		<div class="scrolldown">
+			<a href="#about" class="scroll-icon smoothscroll">		
+		   	Scroll Down		   	
+		   	<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+			</a>
+		</div>			
+   
+   </section> <!-- end home -->
+
+
+   <!-- about
+   ================================================== -->
+   <section id="about">
+
+   	<div class="row about-wrap">
+   		<div class="col-full">
+
+   			<div class="about-profile-bg"></div>
+
+				<div class="intro">
+					<h3 class="animate-this">About Us</h3>
+	   			<p class="lead animate-this"><span>AI</span> 학습 데이터셋 전처리 자동화 기술과 영상인식 기술에 지속적인 투자 연구를 
+진행하고 있으며, 학습 데이터셋 추천 및 검증 솔루션에 기반한 독자적인 기술력을 바탕으로 딥러닝 솔루션을 제공하는 <span>AI</span> 전문기업입니다. 
+ </p>	
+				</div>   
+
+   		</div> <!-- end col-full  -->
+   	</div> <!-- end about-wrap  -->
+
+   </section> <!-- end about -->
+
+
+   <!-- about
+   ================================================== -->
+   <section id="services">
+
+   	<div class="overlay"></div>
+   	<div class="gradient-overlay"></div>
+   	
+   	<div class="row narrow section-intro with-bottom-sep animate-this">
+   		<div class="col-full">
+   			
+   				<h3>Services</h3>
+   			   <h1>What We Do.</h1>
+   			
+   			   <p class="lead" style="color:white">일상에서 쉽게 접할 수 있는 동영상 내 이미지 검색 솔루션 및 최근 B2B 시장에서 각광받고 있는 OCR 기반 서식 분류 솔루션 
+등의 딥러닝 기반 기술로 다양한 분야에서 기술적, 사회적 발전에 기여하고 있습니다. 
+   			   </p>
+   			
+   	   </div> <!-- end col-full -->
+   	</div> <!-- end row -->
+
+   	<div class="row services-content">
+
+   		<div class="services-list block-1-2 block-tab-full group">
+
+	      	<div class="bgrid service-item animate-this">	
+
+	      		<span class="icon"><i class="icon-file"></i></span>            
+
+	            <div class="service-content">
+	            	<h3 class="h05">문서 인식 기반 업무</h3>
+
+		            <p>
+		            오토 라벨링을 통한 데이터 확인 및 분류,<br>체크박스 입력란 체크 유무 확인,<br>수기 작성 서류의 데이터 검증 및 필수 항목 입력 
+		            
+		            
+
+	         		</p>	         		
+	         	</div> 	         	 
+
+				</div> <!-- end bgrid -->
+
+				<div class="bgrid service-item animate-this">	
+
+					<span class="icon"><i class="icon-video-camera"></i></span>                          
+
+	            <div class="service-content">	
+	            	<h3 class="h05">영상 인식 기술</h3>  
+
+		            <p>영상 데이터 비교 분석 및 구간 점핑<br>
+						이미지 프로세싱 기반 영상 Tracking<br>
+						저작권 보호, 불법 영상물 차단 및 관리<br>
+						OTT 플랫폼과 연동되는 영상 이어보기 서비스
+	         		</p>	         		
+	            </div>	                          
+
+			   </div> <!-- end bgrid -->
+
+			   <div class="bgrid service-item animate-this">
+
+			   	<span class="icon"><i class="icon-education"></i></span>		            
+
+	            <div class="service-content">
+	            	<h3 class="h05">AI 인재 육성 교육</h3>
+
+		            <p>AI 인재 육성을 위한 
+						교육 시행,<br>
+						대규모 투자로 접근하기 
+						어려운 케이스
+
+	        			</p>
+	            </div> 	            	               
+
+			   </div> <!-- end bgrid -->
+
+				<div class="bgrid service-item animate-this">
+
+					<span class="icon"><i class="icon-layers"></i></span>	              
+
+	            <div class="service-content">
+	            	<h3 class="h05">AI 학습 데이터셋 가공</h3>
+						
+		            <p>
+		          	  좋은 인공지능을 개발하기 위해서는 인공지능에게 학습시킬 고품질의 데이터가 필요합니다.얼굴로 나이와 성별을 판별하는 인공지능을 위해서는 수많은 얼굴 사진 데이터가 필요하고, 인공지능 스피커(음성인식) 개발을 위해서는 다양한 나이와 성별, 지역에 따른 사람들의 목소리 데이터가 필요합니다. 인공지능 학습에 활용할 수 있는 데이터를 모아놓은 것이 바로 Dataset입니다.
+	         		</p>	         		
+	            </div>                
+
+				</div> <!-- end bgrid -->			   
+
+	      </div> <!-- end services-list -->
+   		
+   	</div> <!-- end services-content -->   			
+
+   </section> <!-- end services -->
+
+   <!-- Testimonials Section
+   ================================================== -->
+   <section id="testimonials">
+
+   	<div class="row">
+   		<div class="col-twelve">
+   			<h2 class="animate-this">Business Area</h2>
+   		</div>   		
+   	</div>   	
+
+
+    <ul class="slides">
+        <input type="radio" name="radio-btn" id="img-1" checked />
+        <li class="slide-container">
+            <div class="slide">
+                <img src="http://farm9.staticflickr.com/8072/8346734966_f9cd7d0941_z.jpg" />
+            </div>
+            <div class="nav">
+                <label for="img-6" class="prev">&#x2039;</label>
+                <label for="img-2" class="next">&#x203a;</label>
+            </div>
+        </li>
+    
+        <input type="radio" name="radio-btn" id="img-2" />
+        <li class="slide-container">
+            <div class="slide">
+              <img src="http://farm9.staticflickr.com/8504/8365873811_d32571df3d_z.jpg" />
+            </div>
+            <div class="nav">
+                <label for="img-1" class="prev">&#x2039;</label>
+                <label for="img-3" class="next">&#x203a;</label>
+            </div>
+        </li>
+    
+        <input type="radio" name="radio-btn" id="img-3" />
+        <li class="slide-container">
+            <div class="slide">
+              <img src="http://farm9.staticflickr.com/8068/8250438572_d1a5917072_z.jpg" />
+            </div>
+            <div class="nav">
+                <label for="img-2" class="prev">&#x2039;</label>
+                <label for="img-4" class="next">&#x203a;</label>
+            </div>
+        </li>
+    
+    
+        <input type="radio" name="radio-btn" id="img-4" />
+        <li class="slide-container">
+            <div class="slide">
+              <img src="http://farm9.staticflickr.com/8055/8098750623_66292a35c0_z.jpg" />
+            </div>
+            <div class="nav">
+                <label for="img-3" class="prev">&#x2039;</label>
+                <label for="img-5" class="next">&#x203a;</label>
+            </div>
+        </li>
+    
+        <input type="radio" name="radio-btn" id="img-5" />
+        <li class="slide-container">
+            <div class="slide">
+              <img src="http://farm9.staticflickr.com/8195/8098750703_797e102da2_z.jpg" />
+            </div>
+            <div class="nav">
+                <label for="img-5" class="prev">&#x2039;</label>
+                <label for="img-1" class="next">&#x203a;</label>
+            </div>
+        </li>
+    
+        <li class="nav-dots">
+          <label for="img-1" class="nav-dot" id="img-dot-1"></label>
+          <label for="img-2" class="nav-dot" id="img-dot-2"></label>
+          <label for="img-3" class="nav-dot" id="img-dot-3"></label>
+          <label for="img-4" class="nav-dot" id="img-dot-4"></label>
+          <label for="img-5" class="nav-dot" id="img-dot-5"></label>
+        </li>
+    </ul>
+             <!-- end slides -->
+
+
+   </section> <!-- end testimonials -->
+
+	<!-- contact
+   ================================================== -->
+   <section id="contact">
+
+      <div class="overlay"></div>
+
+		<div class="row narrow section-intro with-bottom-sep animate-this">
+   		<div class="col-twelve">
+   			<h3>Contact</h3>
+   			<h1>Get In Touch.</h1>
+
+   		</div> 
+   	</div> <!-- end section-intro -->
+
+   	<div class="row contact-content">
+
+   		<div class="col-seven tab-full animate-this">
+
+   			<h5>Send Us A Message</h5>
+
+            <!-- form 	-->	
+            <form class="form-horizontal" action="/board/register.do" th:object="${board}" method="post" enctype="multipart/form-data">
+						<input type="hidden" th:if="*{idx != null and idx > 0}"
+				th:field="*{idx}" />
+			
+			<div class="form-field">
+ 					   <input name="contactName" th:field="*{title}" type="text" id="contactName" placeholder="제목을 입력해주세요" value="" minlength="2" required="">
+               </div>
+
+			<div class="form-field">
+ 					   <input name="contactName" th:field="*{writer}"  type="email" id="contactName" placeholder="이메일을 입력해주세요" value="" minlength="2" required="">
+               </div>
+			
+			
+			<div class="form-field">
+	              	<textarea th:field="*{content}" name="contactMessage" id="contactMessage" placeholder="문의내용을 입력해주세요" rows="10" cols="50" required=""></textarea>
+	            </div> 
+			
+						<div id="btnDiv" class="btn_wrap text-center" th:object="${params}">
+				<button type="submit"
+					class="submitform">저장하기</button>
+			</div>
+               </form> <!-- end form -->
+		
+            <!-- contact-warning -->
+            <div id="message-warning"></div> 
+
+            <!-- contact-success -->
+      		<div id="message-success">
+               <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+      		</div>
+
+         </div> <!-- end col-seven --> 
+
+         <div class="col-four tab-full contact-info end animate-this">
+
+         	<h5>Contact Information</h5>
+			
+	   		         	<div class="cinfo">
+	   			<p>
+	            </p>
+	   		</div>
+	   		<div class="cinfo">
+	   			<h6>Email Us At</h6>
+	   			<p>
+	   				ksyoon@intuworks.co.kr<br>
+				   	someone@mworks.co.kr			     
+				   </p>
+	   		</div> <!-- end cinfo -->
+
+	   		<div class="cinfo">
+	   			<h6>Call Us At</h6>
+	   			<p>
+	   				Phone: 02-6465-1000<br>
+				   	Mobile: 010-4009-1669<br>
+				     	Fax: 000 0000
+				   </p>
+	   		</div>
+
+         </div> <!-- end cinfo --> 
+
+   	</div> <!-- end row contact-content -->
+		
+	</section> <!-- end contact -->
+
+   <div id="preloader"> 
+    	<div id="loader"></div>
+   </div> 
+	
+   <!-- Java Script
+   ================================================== --> 
+   <script src="js/jquery-2.1.3.min.js"></script>
+   <script src="js/plugins.js"></script>
+   <script src="js/main.js"></script>
+
+</body>
+</th:block>
+</html>

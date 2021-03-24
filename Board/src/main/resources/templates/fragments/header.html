@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+   <header th:fragment="commonheader">
+		<div class="header-logo">
+		<a th:href="@{/}">IntuWorks</a>
+	</div>
+
+	<a id="header-menu-trigger" href="#0"> 
+		<span class="header-menu-text">Menu</span> 
+		<span class="header-menu-icon"></span>
+	</a>
+
+	<nav id="menu-nav-wrap">
+
+		<a href="#0" class="close-button" title="close"><span>Close</span></a>
+
+		<h3>IntuWorks</h3>
+		<ul class="nav-list">
+			<h3 sec:authorize="isAuthenticated()">
+				hello, <span sec:authentication="name"></span>!
+			</h3>
+			
+			<li><a th:href="@{/}">Home</a></li>
+			<li><a th:href="@{/board/list.do}">board</a></li>
+			<li><a href="/#about" title="">About</a></li>
+			<li><a href="/#services" title="">Services</a></li>
+			<li><a href="/#testimonials" title="">Works</a></li>
+			<li><a href="/#contact" title="">Contact</a></li>
+			<li><a sec:authorize="isAnonymous()" th:href="@{/member/login}">Login</a></li>
+			<li><a sec:authorize="isAuthenticated()"
+				th:href="@{/member/logout}">Logout</a></li>
+		</ul>
+	</nav>
+	<!-- end #menu-nav-wrap -->
+</header>
+</html>

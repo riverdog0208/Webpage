@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]>
+<!-->
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/basic">
+ <!--<![endif]-->
+
+
+<th:block layout:fragment="content">
+<body id="top">
+<header th:include="fragments/header::commonheader"></header>
+	<section id="contact">
+		<div style="background-color: #FFFFFF; padding-bottom: 3rem">
+			<div class="row add-bottom">
+				<div class="col-twelve">
+					<h3></h3>
+					<div class="table-responsive">
+						<table>
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>등록일</th>
+									<th>조회 수</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:if="${not #lists.isEmpty( boardList )}"
+									th:each="row : ${boardList}">
+									<td scope="row"
+										th:text="${#strings.equals( row.noticeYn, 'Y' ) ? '공지' : row.idx}"></td>
+									<td class="text-left"><a
+										th:href="@{/board/view.do( idx=${row.idx} )}"
+										th:text="${row.title}"></a></td>
+									<td th:text="${row.writer}"></td>
+									<td
+										th:text="${#temporals.format( row.insertTime, 'yyyy-MM-dd' )}"></td>
+									<td th:text="${row.viewCnt}"></td>
+								</tr>
+								<tr th:unless="${not #lists.isEmpty( boardList )}">
+									<td colspan="5">조회된 결과가 없습니다.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<th:block layout:fragment="paging">
+				<nav th:replace="fragments/common :: pagination"></nav>
+				</th:block>
+				<div class="btn_wrap text-right">
+					<a th:href="@{/board/write.do}"
+						class="btn btn-primary waves-effect waves-light">글쓰기</a>
+				</div>
+			</div>
+		</div>
+	</section>
+		<th:block layout:fragment="script">
+   		<script th:src="@{/js/plugins.js}"></script>
+  		<script th:src="@{/js/main.js}"></script>
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			function movePage(uri, queryString) {
+				location.href = uri + queryString;
+			}
+
+			/*]]>*/
+		</script>
+		</th:block>
+		</body>
+	</th:block>
+</html>
